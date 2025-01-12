@@ -72,3 +72,32 @@
     # = quantiles 2.5% and 97.5%
   lowlim <- qnorm(0.025, mean=132, sd=13, lower.tail=TRUE)
   upplim <- qnorm(0.975, mean=132, sd=13, lower.tail=TRUE)
+
+  # Make a plot )
+  lowlimP <- dnorm(lowlim, mean=132, sd=13)
+  upplimP <- dnorm(upplim, mean=132, sd=13)
+  P160 <- dnorm(160, mean=132, sd=13)
+  plot(x2, y2, type="l")
+  segments(lowlim, 0, lowlim, lowlimP, col="red")
+  segments(upplim, 0, upplim, upplimP, col="red")
+  segments(160, 0, 160, P160, col="blue")
+  # Fill the area under the curve between the confidence interval
+  x5 <- c(lowlim, lowlim:upplim, upplim)
+  y5 <- dnorm(x5, mean=132, sd=13)
+  x6 <- c(lowlim, lowlim, lowlim:upplim, upplim, upplim)
+  y6 <- c(0, y5, 0)
+  polygon(x6, y6, col="orange") # Beautiful <3
+
+# Excercises : 
+  # standard normal distribution (mean = 0, sd = 1)
+    # Probability of obtaining a value euqal to 2
+    dnorm(2) # 5.4% probability
+    # Probability of obtaining a value greater than 3
+    pnorm(3, lower.tail = FALSE) # 0.13%
+  # Binomial Distribution, probability of obtaining
+    # 10/10 successes when p=0.8
+    dbinom(10, size = 10, prob = 0.8) # 10.74%
+    # at most 3 successes out of 20, p=0.1
+    pbinom(3, size = 20, prob = 0.1) # 86.70%
+    # more than 3 successes out of 6, p=0.5
+    pbinom(3, size = 6, prob = 0.5, lower.tail = FALSE) # 34.38%
