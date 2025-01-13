@@ -59,3 +59,69 @@
             # 0.2 / 5 = 0.04 :)
           # Sum of all rectangles = 1
           # Frequency density = the probability of a random datapoint to fall in a class
+        
+    # Boxplot
+    boxplot(caleor, main="Boxplot") # default
+    boxplot(caleor,col=grey(0.8),main="Carapace Lengths",las=1) 
+      # las changes orientation of axis numbers to horizontal
+    rug(caleor,side=2)
+      # representation of the data distribution on side (counting clockwise from the bottom side)
+    boxplot(caleor,notch=T,col=grey(0.8),main="carapace lengths",las = 1)
+      # Makes a notch at median witch the amplitude is proportional to variance of data
+      # Good when comparing datasets, overlapping notch means similar data distribution
+    
+    # Exercise
+    blue <- crabs$RW[crabs$sp=="B"]
+    hist(blue, prob=TRUE, main="Blue crab's RW", col="forestgreen")
+      lines(density(blue), col="orange")
+    boxplot(blue, notch=T, main="Boxplot of Blue Crab's RW", col="pink", las=1)
+
+## Scatterplot
+    # Two quantitative variables
+    
+    cawior <- crabs$CW[crabs$sp=="O"]
+    plot(caleor, cawior)
+    
+    par(mfrow=c(1,3))
+    plot(caleor, cawior)
+    plot(cawior~caleor,col="red",main="Length and Width of carapaces")    
+    plot(cawior~caleor,pch=20)    
+  
+    plot(cawior~caleor,main="Length and Width of 100 crabs", pch=20, xlab="length (in mm)",ylab="width (in mm)")
+      abline(h=mean(cawior), lty=2, col=grey(0.6)) 
+      abline(v=mean(caleor), lty=2, col=grey(0.6))  
+        # lty for the format of the line
+      points(mean(caleor),mean(cawior),col="red",pch=20,cex=2)
+    
+    sexcol <- ifelse(crabs$sex=="F", "orange", "skyblue")  
+    plot(cawior~caleor,main="Length and Width of 100 crabs", pch=20, col=sexcol, xlab="length (in mm)",ylab="width (in mm)")
+      abline(h=mean(cawior), lty=2, col=grey(0.6)) 
+      abline(v=mean(caleor), lty=2, col=grey(0.6))  
+      points(mean(caleor),mean(cawior),col="red",pch=20,cex=2)
+    
+  # Exercise
+    blue <- crabs$RW[crabs$sp=="B"]
+    blueFL <- crabs$FL[crabs$sp=="B"]
+    
+    par(mfrow=c(1,3))
+    plot(cawior~caleor, col="forestgreen", pch=17)
+    plot(cawior~caleor, col="skyblue", pch=15,)
+      abline(h=mean(cawior), col="orange")
+      abline(v=mean(caleor), col="orange")
+    plot(cawior~caleor, pch=3, col="red")
+      points(mean(caleor), mean(cawior),pch=8, col="purple", cex=2 )
+
+# Boxplot
+  # ONE quantitative + ONE qualitative variable
+  
+  sex <- crabs$sex[crabs$sp=="O"]
+  par(mfrow=c(1,2))  
+  par(mar=c(3,2,2,2))
+  boxplot(caleor~sex) # quantitative ~ qualitative
+  boxplot(caleor~sex,col=c("purple","green"),notch = T)
+
+  # Exercise :
+  Mcol <- crabs$sp[crabs$sex=="M"]
+  MRW <- crabs$RW[crabs$sex=="M"]
+  par(mar=c(3,2,2,2))
+  boxplot(MRW ~ Mcol)
